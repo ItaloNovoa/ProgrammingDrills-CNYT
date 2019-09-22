@@ -74,9 +74,9 @@ git clone https://github.com/ItaloNovoa/lab2-CNYT.git
 3. Ingresar a la carpeta de archivo 
 4. digitar (Windows):
 ~~~~
-python  matrices.py 
+python  Programming Drills.py 
 ~~~~ 
 4.digitar (Ubuntu, Mac)
 ~~~~
-python3 matrices.py 
+python3 Programming Drills.py
 ~~~~
