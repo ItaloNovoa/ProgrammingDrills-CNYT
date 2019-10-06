@@ -55,9 +55,40 @@ appropriate resulting matrix and vector.
 ![image](https://user-images.githubusercontent.com/42522754/65380439-44956e80-dca1-11e9-8610-d1eb275a1e3b.png)
 ##### Este sistema tiene 2 rendijas, 3 objetivos cada 1 y 1 objetivo compartido con la siguiente rendija
 
+~~~~
+#ProgamiNGDrill_3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1)
+~~~~
+
+
+##### Programming Drill 3.3.1
+Modify your program from Programming Drill 3.2.1 so
+that you allow the entries to be complex numbers as opposed to fractions.
+
+##### Descripcion entrada:
+- la primera entrada es un vector el cual describe el estado inicial del sistema
+- la segunda entrada es una matriz que representa las probabilidades en el flujo del sistema 
+- la tercera entrada es un entero el cual se usa para votar el vector del sistema despues de n Click´s
 
 ~~~~
-#rendijas3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1)
+v=[(1/3**0.5,0),(0,2/15**0.5),((2/5)**0.5,0)]
+m=[[(1/2**0.5,0),(1/2**0.5,0),(0,0)],[(0,-1/2**0.5),(0,1/2**0.5),(0,0)],[(0,0),(0,0),(0,0)]]
+#ProgamiNGDrill_3_3_1(v,m,1)
+~~~~
+
+##### Programming Drill 3.3.2
+Modify your program from Programming Drill 3.2.2 so
+that you allow transitions from the many slits to the many measuring devices to be
+complex numbers. Your program should identify where there are interference phenomena.
+
+##### Descripcion entrada:
+- la primera entrada representa la cantidad de rendijas en el sistema
+- la segunda entrada representa la cantidad de objetivos por rendija
+- la tercera entrada es la cantidad de objetivos compartidos con la siguiente rendija
+- la cuarta entrada es el vector incial del sistema
+- la quinta entrada es un entero el cual se usa para votar el vector del sistema despues de n Click´s
+
+~~~~
+ProgamiNGDrill_3_3_2(2,3,1,[(1,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0)],1)
 ~~~~
 
 
