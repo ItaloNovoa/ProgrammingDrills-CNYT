@@ -10,24 +10,24 @@ def ProgamiNGDrill_3_1_1(VectorIni,MatrizDir,clicks):
 
         return (VectorIni)
 
-#m=[[(1/2**0.5,0),(1/2**0.5,0),(0,0)],[(0,-1/2**0.5),(0,1/2**0.5),(0,0)],[(0,0),(0,0),(0,0)]]
-#v=[(1/3**0.5,0),(0,2/15**0.5),((2/5)**0.5,0)]
-def ProgamiNGDrill_3_3_1(VectorIni,MatrizDir,clicks):
+def ProgamiNGDrill_3_1_2(VectorIni,MatrizDir,clicks):
     VectorIni=transpuestaVector(VectorIni)
     if(len(MatrizDir[0])!=len(VectorIni)):
         return "entrada error"        
     else:
         for i in range(clicks):
-            VectorIni=multiplicacionDeMatricesComplejas(MatrizDir,VectorIni)
+             VectorIni=multiplicacionDeMatricesComplejas(MatrizDir,VectorIni)
 
-        return (VectorIni)
+    return (VectorIni)
+
+
 
 
 #numRendijas entero --> cantidad de rendijas
 #numBlancos entero --> cantidad de blancos por rendija
 #numCompartidas entero --> cantidad de blancos compartidos con la siguiente rendija
-#rendijas3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1)
-def rendijas3_2_2(numRendijas,numBlancos,numCompartidas,vectorInic,clicks):
+#ProgamiNGDrill_3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1)
+def ProgamiNGDrill_3_2_2(numRendijas,numBlancos,numCompartidas,vectorInic,clicks):
     
     if(numRendijas==1):
         n=2+numBlancos
@@ -54,15 +54,72 @@ def rendijas3_2_2(numRendijas,numBlancos,numCompartidas,vectorInic,clicks):
                 else:
                     if(i==j):
                         m[j][i]=1
-
+        """
         print()
         print ("la matriz es : ")
         print()
         print (bonita(m))        
         print("el vector resultante es :")
-        print()
+        print()"""
         m2=multiplicacionDeMatrices(m,m)
+        #print(ProgamiNGDrill_3_1_1(vectorInic,m2,clicks))
         return (ProgamiNGDrill_3_1_1(vectorInic,m2,clicks))
+    
+
+#m=[[(1/2**0.5,0),(1/2**0.5,0),(0,0)],[(0,-1/2**0.5),(0,1/2**0.5),(0,0)],[(0,0),(0,0),(0,0)]]
+#v=[(1/3**0.5,0),(0,2/15**0.5),((2/5)**0.5,0)]
+def ProgamiNGDrill_3_3_1(VectorIni,MatrizDir,clicks):
+    VectorIni=transpuestaVector(VectorIni)
+    if(len(MatrizDir[0])!=len(VectorIni)):
+        return "entrada error"        
+    else:
+        for i in range(clicks):
+            VectorIni=multiplicacionDeMatricesComplejas(MatrizDir,VectorIni)
+
+        return (VectorIni)
+    
+
+#numRendijas entero --> cantidad de rendijas
+#numBlancos entero --> cantidad de blancos por rendija
+#numCompartidas entero --> cantidad de blancos compartidos con la siguiente rendija
+#ProgamiNGDrill_3_3_2(2,3,1,[(1,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0)],1)
+def ProgamiNGDrill_3_3_2(numRendijas,numBlancos,numCompartidas,vectorInic,clicks):
+    
+    if(numRendijas==1):
+        n=2+numBlancos
+    else:
+        n=(1+numRendijas)+(2*(numBlancos-numCompartidas)+numCompartidas)+((numRendijas-2)*(numBlancos-numCompartidas))
+
+    if(len(vectorInic)!=n):
+        return "las entradas no coinciden"
+    else:
+        m=[]
+        for i in range(8):
+            m.append([(0,0)]*n)
+        for i in range(n):
+            for j in range(n):
+                if(i==0):
+                    if(j>0 and j<=numRendijas):
+                        m[j][i]=(float("%.2f" %(1/numRendijas)),0)
+                elif(i>0 and i<=numRendijas):
+                    if(i==1):
+                        if(j>numRendijas+((i-1)*numBlancos) and j<=numRendijas+(i*numBlancos)):
+                          m[j][i]=(m[j][i][0]+float("%.2f" %(1/numBlancos)),0)
+                    elif(j>numRendijas+((i-1)*numBlancos)-numCompartidas and j<=numRendijas+(i*numBlancos)-numCompartidas):
+                          m[j][i]=(float("%.2f" %(1/numBlancos))+m[j][i][0],0)
+                else:
+                    if(i==j):
+                        m[j][i]=(1,0)
+
+        """print()
+        print ("la matriz es : ")
+        print()
+        print (bonitaCompleja(m))        
+        print("el vector resultante es :")
+        print()
+        print()"""
+        m2=multiplicacionDeMatricesComplejas(m,m)
+        return (ProgamiNGDrill_3_1_2(vectorInic,m2,clicks))
 
 #----------------------------------------Complementarios----------------------------------------
 
@@ -97,11 +154,11 @@ def bonitaCompleja(mi):
     for i in range(len(mi)):
         for j in range(len(mi[i])):
             if((mi[i][j][1])>0):
-                print(str(mi[i][j][0])+"+"+str(mi[i][j][1])+"i", end= " ")
+                print(str(mi[i][j][0])+"+"+str(mi[i][j][1])+"i", end= " "*(7-(len(str(mi[i][j][0])))+len(str(mi[i][j][1]))))
             elif((mi[i][j][1])==0):
-                print(str(mi[i][j][0]), end= " ")
+                print(str(mi[i][j][0]), end= " "*(7-len(str(mi[i][j][0]))))
             else:
-                print(str(mi[i][j][0])+str(mi[i][j][1])+"i", end= " ")
+                print(str(mi[i][j][0])+str(mi[i][j][1])+"i", end= " "*(7-(len(str(mi[i][j][0])))+len(str(mi[i][j][1]))))
         print()
 
 
@@ -142,17 +199,24 @@ class TestUM(unittest.TestCase):
         V=[6,2,1,5,3,10]
         m1=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,0,0,0,1],[0,0,0,1,0,0],[0,0,1,0,0,0],[1,0,0,0,1,0]]
         self.assertEqual([[0], [0], [12], [5], [1], [9]],ProgamiNGDrill_3_1_1(V,m1,1))
+
+    def test_caso_ProgamiNGDrill_3_1_2(self):
+        V=[(1,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0)]
+        m=[[(0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], [(0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0)], [(0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0)], [(0.165, 0.0), (0.33, 0.0), (0.0, 0.0), (1.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0)], [(0.165, 0.0), (0.33, 0.0), (0.0, 0.0), (0.0, 0.0), (1.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0)], [(0.33, 0.0), (0.33, 0.0), (0.33, 0.0), (0.0, 0.0), (0.0, 0.0), (1.0, 0.0), (0.0, 0.0), (0.0, 0.0)], [(0.165, 0.0), (0.0, 0.0), (0.33, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (1.0, 0.0), (0.0, 0.0)], [(0.165, 0.0), (0.0, 0.0), (0.33, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (0.0, 0.0), (1.0, 0.0)]]
+        self.assertEqual([[(0.0, 0.0)], [(0.0, 0.0)], [(0.0, 0.0)], [(0.165, 0.0)], [(0.165, 0.0)], [(0.33, 0.0)], [(0.165, 0.0)], [(0.165, 0.0)]] ,ProgamiNGDrill_3_1_2(V,m,1))
     def test_caso_ProgamiNGDrill_3_2_1(self):
         V=[1/6,1/6,2/3]
         m1=[[0,1/6,5/6],[1/3,1/2,1/6],[2/3,1/3,0]]
         self.assertEqual([[0.5833333333333334], [0.25], [0.16666666666666666]] ,ProgamiNGDrill_3_1_1(V,m1,1))
     def test_caso_ProgamiNGDrill_3_2_2(self):
-        self.assertEqual([[0.0], [0.0], [0.0], [0.16666666666666666], [0.16666666666666666], [0.3333333333333333], [0.16666666666666666], [0.16666666666666666]] ,rendijas3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1))
+        self.assertEqual([[0.0], [0.0], [0.0], [0.16666666666666666], [0.16666666666666666], [0.3333333333333333], [0.16666666666666666], [0.16666666666666666]] ,ProgamiNGDrill_3_2_2(2,3,1,[1,0,0,0,0,0,0,0],1))
 
     def test_caso_ProgamiNGDrill_3_3_1(self):
         m=[[(1/2**0.5,0),(1/2**0.5,0),(0,0)],[(0,-1/2**0.5),(0,1/2**0.5),(0,0)],[(0,0),(0,0),(0,0)]]
         v=[(1/3**0.5,0),(0,2/15**0.5),((2/5)**0.5,0)]
         self.assertEqual([[(0.408248290463863, 0.36514837167011066)], [(-0.36514837167011066, -0.408248290463863)], [(0.0, 0.0)]] ,ProgamiNGDrill_3_3_1(v,m,1))
+    def test_caso_ProgamiNGDrill_3_3_2(self):
+        self.assertEqual([[(0.0, 0.0)], [(0.0, 0.0)], [(0.0, 0.0)], [(0.165, 0.0)], [(0.165, 0.0)], [(0.33, 0.0)], [(0.165, 0.0)], [(0.165, 0.0)]] ,ProgamiNGDrill_3_3_2(2,3,1,[(1,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0)],1))
 
 
 if __name__ =='__main__':
